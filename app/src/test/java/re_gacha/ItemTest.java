@@ -11,10 +11,21 @@ public class ItemTest {
     @Test //정상적으로 아이템이 추가되는가?
     void AddItemTest(){
         String itemname = "블랙티켓";
+        int value = 10;
 
-        item.AddItem(itemname);
+        item.AddItem(itemname,value);
 
         assertNotNull(item,"not null");
-
+        
     }
+    @Test
+    void GetItemTest(){
+        String itemname = "블랙티켓";
+
+
+        int value = item.getItem(itemname);
+
+        assertEquals(value,10);
+    }
+
 }

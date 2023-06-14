@@ -1,12 +1,25 @@
 package re_gacha.mainlogic;
 
+import java.util.Map;
+import java.util.HashMap;
+
 public class Item {
-    public Item makeItem(String item) {
-        
+    public void AddItem(String item, int value) {
+        itemMap.put(item,value);
     }
 
-    public Item changeItem(String item, int itemvalue) {
+    public void changeItem(String item, int itemvalue) {
 
+    }
+
+    public int getItem(String item) {
+        return itemMap.get(item);
+    }
+
+    private Map<String, Integer> itemMap;
+
+    public void Item() {
+        itemMap = new HashMap<>();
     }
 
 }

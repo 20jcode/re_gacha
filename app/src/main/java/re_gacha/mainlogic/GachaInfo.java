@@ -1,5 +1,5 @@
 package re_gacha.mainlogic;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 
 
 public class GachaInfo {
