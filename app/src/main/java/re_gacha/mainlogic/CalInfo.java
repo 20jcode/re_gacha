@@ -1,5 +1,5 @@
 package re_gacha.mainlogic;
 
-public interface CalInfo {
+public class CalInfo {
     
 }

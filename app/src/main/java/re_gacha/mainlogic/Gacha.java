@@ -5,7 +5,7 @@ public class Gacha {
 
     }
 
-    public Object doGacha(Item item,String gachavalue) {
+    public void doGacha(Item item,String gachavalue) {
 
     }
 }

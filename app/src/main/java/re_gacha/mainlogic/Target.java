@@ -6,6 +6,6 @@ public class Target {
     }
 
     public String getTarget(Item item) {
-
+        return "";
     }
 }
