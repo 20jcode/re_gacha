@@ -1,11 +1,11 @@
 package re_gacha.mainlogic;
 
 public class Gacha {
-    public void makeGacha(Item item,Object gachainfo) {
+    public void makeGacha(Item item,GachaInfo gachainfo) {
 
     }
 
-    public Object doGacha(Item item,Object gachavalue) {
-        
+    public Object doGacha(Item item,String gachavalue) {
+
     }
 }
