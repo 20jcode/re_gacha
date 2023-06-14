@@ -21,11 +21,14 @@ public class ItemTest {
     @Test
     void GetItemTest(){
         String itemname = "블랙티켓";
+        int value = 10;
+
+        item.AddItem(itemname,value);
 
 
-        int value = item.getItem(itemname);
+        int result = item.getItem(itemname);
 
-        assertEquals(value,10);
+        assertEquals(result,10);
     }
 
 }

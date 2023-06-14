@@ -18,7 +18,7 @@ public class Item {
 
     private Map<String, Integer> itemMap;
 
-    public void Item() {
+    public Item() {
         itemMap = new HashMap<>();
     }
 
