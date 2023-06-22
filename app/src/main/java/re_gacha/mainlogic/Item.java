@@ -4,8 +4,23 @@ import java.util.Map;
 import java.util.HashMap;
 
 public class Item {
-    
-    public void createItem(Map<String,Integer> obj) {
+
+    private static Item item; //자기 객체를 만들고 - 클래스 로딩시
+    private Item() {} // 외부에서 생성자 접근 제한
+
+    private Map<String, Integer> itemMap; // item객체의 itemMap type 지정
+
+    public static Item createItem(Map<String,Integer> obj) { //최초 생성 시
+        
+        if (item == null) {
+            item = new Item();
+            item.itemMap = new HashMap<>();
+
+            item.itemMap.putAll(obj);
+        }
+
+        return item;
+
 
     }
     
@@ -21,10 +36,7 @@ public class Item {
         return itemMap.get(item);
     }
 
-    private Map<String, Integer> itemMap;
+    
 
-    public Item() {
-        itemMap = new HashMap<>();
-    }
-
+    
 }

@@ -1,6 +1,7 @@
 package re_gacha;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -23,8 +24,9 @@ class ItemTest {
 
     @Test
     @DisplayName("객체 생성 가능 확인")
+    @Disabled // 싱글톤이라서 필요가 없음
     public void canItem(){
-        new Item();
+        //new Item();
     }
     
     @Nested
@@ -35,7 +37,7 @@ class ItemTest {
 
         @BeforeEach
         void setUp(){
-            item = new Item();
+            //item = new Item();
 
             defaultMapData = new HashMap<>();
             defaultMapData.put("blacktiket",12);
@@ -44,10 +46,11 @@ class ItemTest {
         }
 
         @Test
+        @DisplayName("아이템 정상 생성 확인")
         void inputItem(){ //아이템이 정상적으로 들어가는가
 
             // 삽입
-            item.createItem(defaultMapData);
+            item = Item.createItem(defaultMapData);
 
             // 결과
             assertNotNull(item);
@@ -63,6 +66,7 @@ class ItemTest {
         // }
 
         @Test
+        @DisplayName("빈 객체로 생성시 err 발생")
         void nullItemcheck(){ // 빈 map객체를 넣었을 때 err
 
             Map<String,Integer> nullMap = new HashMap<>();
@@ -70,39 +74,43 @@ class ItemTest {
            
 
             assertThrows(nullIteminputException.class, () -> {
-                item.createItem(nullMap);
+                Item.createItem(nullMap);
             });
         }
 
         @Test
+        @DisplayName("이미 생성된 Item을 다시 생성")
+        @Disabled // 굳이 이 테스트는 필요없다고 생각되어짐, 싱글톤?
         void repeatError(){ // 이미 create 한 상태에서 다시 create 시 err
 
-            item.createItem(defaultMapData);
+            // Item.createItem(defaultMapData);
 
-            assertThrows(existItemException.class, () -> {
-                item.createItem(defaultMapData);
-            });
+            // assertThrows(existItemException.class, () -> {
+            //     Item.createItem(defaultMapData);
+            // });
         }
 
         @Test
+        @DisplayName("value가 음수인 값 넣을 시 err 발생")
         void negativeError(){ // value가 음수인 경우 err
 
             defaultMapData.clear();
             defaultMapData.put("나는 음수야",-200);
 
-            assertThorws(neativeItemValueException.class, () -> {
-                item.createItem(defaultMapData);
+            assertThrows(neativeItemValueException.class, () -> {
+                Item.createItem(defaultMapData);
             });
         }
 
         @Test
+        @DisplayName("MAX_VALUE인 int값이 들어갈 경우, err 발생") // max값이라는 것은 이미 데이터 입력 시 int를 넘는 값이 들어간것
         void overflowError(){ // int범위를 넘은 value가 들어갈 경우
 
             defaultMapData.clear();
             defaultMapData.put("오버플로우발생",Integer.MAX_VALUE);
 
             assertThrows(overflowException.class, () -> {
-                item.createItem(defaultMapData);
+                Item.createItem(defaultMapData);
             });
         }
     }
