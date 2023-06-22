@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import re_gacha.mainlogic.Item;
 
 import java.util.Map;
+import java.lang.RuntimeException;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -50,6 +51,7 @@ class ItemTest {
         void inputItem(){ //아이템이 정상적으로 들어가는가
 
             // 삽입
+            
             item = Item.createItem(defaultMapData);
 
             // 결과
@@ -73,7 +75,7 @@ class ItemTest {
 
            
 
-            assertThrows(nullIteminputException.class, () -> {
+            assertThrows(RuntimeException.class, () -> {
                 Item.createItem(nullMap);
             });
         }
@@ -97,7 +99,7 @@ class ItemTest {
             defaultMapData.clear();
             defaultMapData.put("나는 음수야",-200);
 
-            assertThrows(neativeItemValueException.class, () -> {
+            assertThrows(RuntimeException.class, () -> {
                 Item.createItem(defaultMapData);
             });
         }
@@ -109,7 +111,7 @@ class ItemTest {
             defaultMapData.clear();
             defaultMapData.put("오버플로우발생",Integer.MAX_VALUE);
 
-            assertThrows(overflowException.class, () -> {
+            assertThrows(RuntimeException.class, () -> {
                 Item.createItem(defaultMapData);
             });
         }

@@ -3,13 +3,24 @@
  */
 package re_gacha;
 
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.stream.*;
+
 public class App {
     public String getGreeting() {
         return "Hello World!";
     }
 
     public static void main(String[] args) {
+        HashMap<String,Integer> a = new HashMap<>();
+        a.put("dd",12);
+        a.put("ss",13);
+        a.put("se",-2);
+
         
-        System.out.println(new App().getGreeting());
+
+        System.out.println(a.values().stream().anyMatch(e->e<0));
+
     }
 }
