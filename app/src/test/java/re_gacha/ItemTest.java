@@ -13,6 +13,7 @@ import re_gacha.mainlogic.Item;
 import java.util.Map;
 import java.lang.RuntimeException;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -115,6 +116,78 @@ class ItemTest {
                 Item.createItem(defaultMapData);
             });
         }
+    }
+
+    @Nested
+    @DisplayName("아이템 생성 후 증가,감소,조회,기록출력")
+    class ItemUsecase{
+
+        Map<String,Integer> defaultMapData;
+
+        @BeforeEach
+        void setUp(){
+            //item = new Item();
+
+            defaultMapData = new HashMap<>();
+            defaultMapData.put("blacktiket",12);
+            defaultMapData.put("redtiket",23);
+            defaultMapData.put("money",1000);
+
+            item = Item.createItem(defaultMapData);
+
+        }
+
+        @Test
+        @DisplayName("ItemValue조회")
+        void getItemValueTest(){ //getItemValue를 통해 정상적으로 조회가 되는지
+
+            String testKey = "blacktiket"; //조회할 Key
+
+            int value = item.getItemValue(testKey);
+
+            assertEquals(12, value);
+
+
+        }
+
+        @Test
+        @DisplayName("Item에 없는 key에 대해 err")
+        void nullKeyError(){
+
+            assertThrows(RuntimeException.class, ()->{
+                item.getItemValue("이거없음");
+            });
+        }
+
+        @Test
+        @DisplayName("incItem 작동확인")
+        void incItemTest(){
+
+            String testKey = "blacktiket";
+            int testValue = 12;
+            int beforeValue = item.getItemValue(testKey);
+            int afterValue = beforeValue + testValue;
+
+            item.incItem(testKey,testValue);
+
+            assertEquals(afterValue,item.getItemValue(testKey));
+        }
+
+        @Test
+        @DisplayName("decItem 작동확인")
+        void decItemTest(){
+
+            String testKey = "blacktiket";
+            int testValue = 1;
+            int beforeValue = item.getItemValue(testKey);
+            int afterValue = beforeValue-testValue;
+
+            item.decItem(testKey,testValue);
+
+            assertEquals(afterValue,item.getItemValue(testKey));
+        }
+
+
     }
 
 

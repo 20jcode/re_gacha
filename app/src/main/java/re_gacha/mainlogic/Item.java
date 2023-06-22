@@ -40,16 +40,22 @@ public class Item {
 
     }
     
-    public void addItem(String item, int value) { //새로운 아이템 추가
-        itemMap.put(item,value);
+    public int getItemValue(String key) {
+        
+        return item.itemMap.get(key);
     }
 
-    public void decItem(String item, int itemvalue) {
+    public void incItem(String key, int value) { // item.itemMap에 이전값 + value 값
 
+        int beforeValue = item.itemMap.get(key);
+        item.itemMap.put(key,beforeValue+value);
     }
 
-    public int getItem(String item) { //현재 아이템의 남은 수량 확인
-        return itemMap.get(item);
+    public void decItem(String key, int value) { // item.itemMap에 이전값 - value 값
+
+        int beforeValue = item.itemMap.get(key);
+        item.itemMap.put(key,beforeValue-value);
+        
     }
 
     
