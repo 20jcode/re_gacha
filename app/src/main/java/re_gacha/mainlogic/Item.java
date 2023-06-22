@@ -12,7 +12,7 @@ public class Item {
 
     private Map<String, Integer> itemMap; // item객체의 itemMap type 지정
 
-    public static Item createItem(Map<String,Integer> obj) throws RuntimeException{ //최초 생성 시
+    public static Item createItem(Map<String,Integer> obj) throws RuntimeException, IllegalStateException{ //최초 생성 시
         
         if (obj.isEmpty()) { // obj 내부가 빈 값이 전달 되었을 경우
             throw new RuntimeException("null Item은 생성할 수 없습니다.");
@@ -33,6 +33,8 @@ public class Item {
             item = new Item();
             item.itemMap = new HashMap<>();
             item.itemMap.putAll(obj);
+        } else { // 이미 존재할 경우 에러 발생
+            throw new IllegalStateException("Item객체를 중복생성 할 수 없습니다");
         }
 
         return item;
@@ -55,7 +57,7 @@ public class Item {
 
         int beforeValue = item.itemMap.get(key);
         item.itemMap.put(key,beforeValue-value);
-        
+
     }
 
     

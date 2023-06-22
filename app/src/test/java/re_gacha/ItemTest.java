@@ -83,14 +83,13 @@ class ItemTest {
 
         @Test
         @DisplayName("이미 생성된 Item을 다시 생성")
-        @Disabled // 굳이 이 테스트는 필요없다고 생각되어짐, 싱글톤?
+        // 굳이 이 테스트는 필요없다고 생각되어짐, 싱글톤? -> 해봐야 안다.
         void repeatError(){ // 이미 create 한 상태에서 다시 create 시 err
 
-            // Item.createItem(defaultMapData);
-
-            // assertThrows(existItemException.class, () -> {
-            //     Item.createItem(defaultMapData);
-            // });
+            assertThrows(IllegalStateException.class, () -> {
+                Item.createItem(defaultMapData);
+                Item.createItem(defaultMapData);
+            });
         }
 
         @Test
