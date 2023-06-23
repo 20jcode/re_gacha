@@ -1,11 +1,37 @@
 package re_gacha.mainlogic;
 
+import java.util.Map;
+import java.util.Set;
+import java.util.HashMap;
+
+
 public class Target {
-    public void makeTarget(Item item,GachaInfo gachainfo) {
+    
+    private String name;
+    private Map<String,Integer> recipe = new HashMap<>();
+
+    public Target(){
 
     }
 
-    public String getTarget(Item item) {
-        return "";
+    public Target(String name){
+        this.name = name;
+    }
+
+    public String getName(){
+        return name;
+    }
+
+    public void setRecipe(String key, int value){
+
+        recipe.put(key,value);
+    }
+
+    public Set<String> getRecipe(){
+        return recipe.keySet();
+    }
+
+    public int getValue(String key){
+        return recipe.get(key);
     }
 }
