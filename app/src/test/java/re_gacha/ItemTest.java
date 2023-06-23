@@ -1,5 +1,6 @@
 package re_gacha;
 
+import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
@@ -45,6 +46,11 @@ class ItemTest {
             defaultMapData.put("blacktiket",12);
             defaultMapData.put("redtiket",23);
             defaultMapData.put("money",1000);
+        }
+
+        @AfterEach
+        void cleanUp(){
+            Item.resetItem();
         }
 
         @Test
@@ -134,6 +140,11 @@ class ItemTest {
 
             item = Item.createItem(defaultMapData);
 
+        }
+
+        @AfterEach
+        void cleanUp(){
+            Item.resetItem();
         }
 
         @Test

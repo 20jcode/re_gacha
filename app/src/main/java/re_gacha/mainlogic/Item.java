@@ -41,6 +41,11 @@ public class Item {
 
 
     }
+
+    public static void resetItem(){ //테스트를 위해, item을 null로 설정. 다시 createItem할 수 있도록
+
+        item = null;
+    }
     
     public int getItemValue(String key) {
         
