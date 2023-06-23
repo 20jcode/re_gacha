@@ -14,6 +14,7 @@ import re_gacha.mainlogic.Item;
 import java.util.Map;
 import java.lang.RuntimeException;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -82,7 +83,7 @@ class ItemTest {
 
            
 
-            assertThrows(RuntimeException.class, () -> {
+            assertThrows(IllegalArgumentException.class, () -> {
                 Item.createItem(nullMap);
             });
         }
@@ -105,7 +106,7 @@ class ItemTest {
             defaultMapData.clear();
             defaultMapData.put("나는 음수야",-200);
 
-            assertThrows(RuntimeException.class, () -> {
+            assertThrows(IllegalArgumentException.class, () -> {
                 Item.createItem(defaultMapData);
             });
         }
@@ -117,7 +118,7 @@ class ItemTest {
             defaultMapData.clear();
             defaultMapData.put("오버플로우발생",Integer.MAX_VALUE);
 
-            assertThrows(RuntimeException.class, () -> {
+            assertThrows(IllegalArgumentException.class, () -> {
                 Item.createItem(defaultMapData);
             });
         }
@@ -195,6 +196,49 @@ class ItemTest {
             item.decItem(testKey,testValue);
 
             assertEquals(afterValue,item.getItemValue(testKey));
+        }
+
+        @Test
+        @DisplayName("음수 값 전달 시 오류")
+        void negativeValueTest(){
+
+            String testKey = "blacktiket";
+            int testValue = -1;
+            int beforeValue = item.getItemValue(testKey);
+
+            assertThrows(IllegalArgumentException.class,()->item.incItem(testKey,testValue));
+            assertThrows(IllegalArgumentException.class,()->item.decItem(testKey,testValue));
+            assertDoesNotThrow(() -> item.incItem(testKey,0));
+            assertDoesNotThrow(() -> item.decItem(testKey,0));
+
+            //inc와 dec에서 음수를 넣었을 경우 계산이 안되는가? 에 대해서
+
+            assertEquals(beforeValue,item.getItemValue(testKey));
+        }
+
+        @Test
+        @DisplayName("계산 후 값이 음수인 경우 오류")
+        void subTest(){
+
+            String testKey = "blacktiket";
+            int testValue = item.getItemValue(testKey) +1;
+            int beforeValue = item.getItemValue(testKey);
+
+            assertThrows(IllegalArgumentException.class,()->item.decItem(testKey, testValue));
+
+            assertEquals(beforeValue,item.getItemValue(testKey));
+        }
+
+        @Test
+        @DisplayName("계싼 후 값이 int의 범위를 벗어남")
+        void sumTest(){
+
+            String testKey = "blacktiket";
+            int testValue = Integer.MAX_VALUE-item.getItemValue(testKey)+1;
+            int beforeValue = item.getItemValue(testKey);
+
+            assertThrows(IllegalArgumentException.class,()->item.incItem(testKey, testValue));
+            assertEquals(beforeValue,item.getItemValue(testKey));
         }
 
 
