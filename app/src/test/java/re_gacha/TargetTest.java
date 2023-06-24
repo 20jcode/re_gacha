@@ -1,5 +1,6 @@
 package re_gacha;
 
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
@@ -8,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Set;
 
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -67,12 +69,46 @@ public class TargetTest {
         }
 
         @Test
-        @DisplayName("제조법 여러개 추가하기") //필요없을듯?
-        void multiSetTest(){
+        @DisplayName("소비 item 지정")
+        void useItemTest(){
+
+            String key = "blacktiket";
+            int value = -1;
+
+            assertDoesNotThrow(()->target.setUseItem(key,value)); // 메소드가 동작해야함
+            assertThrowsExactly(IllegalArgumentException.class,() -> target.setUseItem(key,1)); //양수 입력시 err
 
         }
 
-        
+        @Test
+        @DisplayName("소비 item 조회")
+        void getUseItemTest(){
+
+            String key = "blacktiket";
+            int value = -1;
+
+            target.setUseItem(key, value);
+
+            int getValue = target.getUseItem(key);
+
+            assertEquals(value,getValue);
+
+        }
+
+        @Test
+        @DisplayName("소비 item err")
+        @Disabled
+        void getUseItemErrorTest(){
+
+            String key = "blacktiket";
+            int value = -1;
+
+            target.setUseItem(key, value);
+
+            assertThrowsExactly(IllegalArgumentException.class, ()->target.getUseItem("key"), "아이템이 없습니다");
+        }
+
+
 
             
 
