@@ -18,11 +18,19 @@ public class Target {
     public Target(String name){
         this.name = name;
     }
-
+    /**
+     * 아이템을 조합해 완성된 아이템의 이름
+     * @return Target's name
+     */
     public String getName(){
         return name;
     }
 
+    /**
+     * 
+     * @param key 조합에 필요한 아이템의 이름
+     * @param value 조합에 필요한 갯수
+     */
     public void setRecipe(String key, int value){
 
         recipe.put(key,value);
@@ -36,6 +44,12 @@ public class Target {
         return recipe.get(key);
     }
 
+    /**
+     * 
+     * @param key 조합에 필요한 아이템을 뽑기 위해 소모하는 아이템 이름
+     * @param value 갯수
+     * @throws IllegalArgumentException '소모'임으로 음수, 착오방지용으로 음수만 받음
+     */
     public void setUseItem(String key, int value) throws IllegalArgumentException {
 
         if (value>0){

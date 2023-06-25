@@ -41,7 +41,7 @@ class ItemTest {
 
         @BeforeEach
         void setUp(){
-            //item = new Item();
+           
 
             defaultMapData = new HashMap<>();
             defaultMapData.put("blacktiket",12);
@@ -49,18 +49,15 @@ class ItemTest {
             defaultMapData.put("money",1000);
         }
 
-        @AfterEach
-        void cleanUp(){
-            Item.resetItem();
-        }
+        
 
         @Test
         @DisplayName("아이템 정상 생성 확인")
         void inputItem(){ //아이템이 정상적으로 들어가는가
 
             // 삽입
+            Item item = new Item(defaultMapData);
             
-            item = Item.createItem(defaultMapData);
 
             // 결과
             assertNotNull(item);
@@ -74,7 +71,8 @@ class ItemTest {
 
             
         // }
-
+        
+        /*
         @Test
         @DisplayName("빈 객체로 생성시 err 발생")
         void nullItemcheck(){ // 빈 map객체를 넣었을 때 err
@@ -84,9 +82,10 @@ class ItemTest {
            
 
             assertThrows(IllegalArgumentException.class, () -> {
-                Item.createItem(nullMap);
+                item.createItem(nullMap);
             });
         }
+        
 
         @Test
         @DisplayName("이미 생성된 Item을 다시 생성")
@@ -98,6 +97,7 @@ class ItemTest {
                 Item.createItem(defaultMapData);
             });
         }
+        */
 
         @Test
         @DisplayName("value가 음수인 값 넣을 시 err 발생")
@@ -107,7 +107,7 @@ class ItemTest {
             defaultMapData.put("나는 음수야",-200);
 
             assertThrows(IllegalArgumentException.class, () -> {
-                Item.createItem(defaultMapData);
+                new Item(defaultMapData);
             });
         }
 
@@ -119,7 +119,7 @@ class ItemTest {
             defaultMapData.put("오버플로우발생",Integer.MAX_VALUE);
 
             assertThrows(IllegalArgumentException.class, () -> {
-                Item.createItem(defaultMapData);
+                new Item(defaultMapData);
             });
         }
     }
@@ -129,6 +129,7 @@ class ItemTest {
     class ItemUsecase{
 
         Map<String,Integer> defaultMapData;
+        Item item;
 
         @BeforeEach
         void setUp(){
@@ -139,13 +140,8 @@ class ItemTest {
             defaultMapData.put("redtiket",23);
             defaultMapData.put("money",1000);
 
-            item = Item.createItem(defaultMapData);
+            item = new Item(defaultMapData);
 
-        }
-
-        @AfterEach
-        void cleanUp(){
-            Item.resetItem();
         }
 
         @Test

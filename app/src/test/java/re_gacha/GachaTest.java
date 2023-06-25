@@ -10,9 +10,12 @@ import re_gacha.mainlogic.Gacha;
 import re_gacha.mainlogic.Target;
 import re_gacha.mainlogic.Item;
 
+import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.util.Map;
+import java.util.HashSet;
+import java.util.HashMap;
 
 public class GachaTest {
 
@@ -20,21 +23,34 @@ public class GachaTest {
     Item item;
     Map<String,Integer> defaultMap;
     
-    
 
-    @BeforeEach
-    void setUp() {
-        target.setRecipe("realstone", 4);
-        target.setRecipe("gack", 1);
-        item = Item.createItem(defaultMap);
+    @Nested
+    public class GachaoneTest {
 
+        @BeforeEach
+        void setUp() {
+            target.setRecipe("realstone", 4);
+            target.setRecipe("gack", 1);
+            item = Item.createItem(defaultMap);
+
+        }
+
+        @AfterEach
+        void cleanUp(){
+            Item.resetItem();
+        }
+
+        @Test
+        @DisplayName("뽑혔는가")
+        void oneGachaTest(){
+
+            Gacha gacha = new Gacha(item,target);
+            double f = 0.0012f;
+
+            assertInstanceOf(Boolean.class, gacha);
+        }
     }
 
-    @AfterEach
-    void cleanUp(){
-        Item.resetItem();
-
-    }
 
     @Nested
     public class ReadyForGachaTest {
@@ -50,7 +66,21 @@ public class GachaTest {
         void getLeftItemNumTest(){
 
             String targetName = target.getName();
+            HashSet<String> itemname = new HashSet<>(target.getRecipe());
+
+            HashMap<String,Integer> leftItem = 
+
+            //itemname 안에 있는 
+
+            // gacha 객체 생성
+            Gacha gacha = new Gacha(item,target);
+
+            // gacha전 남은 item 수량
+
             
+            gacha.
+
+
 
         }
 
