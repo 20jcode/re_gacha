@@ -7,6 +7,7 @@ import java.lang.IllegalArgumentException;
 /**
  * Use GachaV2Test.class
  * TODO - seperate Gacha and GachaController
+ * TODO - Use BigDecimal
  */
 public class Gacha {
 
@@ -48,7 +49,7 @@ public class Gacha {
 
     public static double multiGacha(Random random, double...args){
 
-        return 0;
+        return randLogic(random.nextDouble(),args);
     }
 
     // TODO : 접근자 변경 필요

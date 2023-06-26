@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
@@ -163,10 +164,19 @@ public class GachaV2Test {
             assertNotNull(Gacha.multiGacha(item1,item2));
             assertNotNull(Gacha.multiGacha(random,item1,item2));
 
+            assertDoesNotThrow(()->Gacha.multiGacha(item1,item2,item3));
+            assertDoesNotThrow(()->Gacha.multiGacha(random,item1,item2,item3));
+
 
         }
 
-        
+
+
+    }
+
+    public static void main(String[] args){
+
+        System.out.println(Gacha.multiGacha(0.230000f,0.250000f,0.480000f));
     }
     
 
