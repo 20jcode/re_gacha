@@ -2,24 +2,30 @@ package re_gacha;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
+import org.junit.jupiter.api.RepeatedTest;
 import org.junit.jupiter.api.Test;
 
 import re_gacha.mainlogic.Gacha;
 import re_gacha.mainlogic.Target;
 import re_gacha.mainlogic.Item;
 
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertInstanceOf;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Map;
 import java.util.HashSet;
 import java.util.HashMap;
 
+@Deprecated
 public class GachaTest {
 
     Target target = new Target("happy");
+    Target target2 = new Target("blacktiket");
     Item item;
     Map<String,Integer> defaultMap;
     
@@ -31,28 +37,39 @@ public class GachaTest {
         void setUp() {
             target.setRecipe("realstone", 4);
             target.setRecipe("gack", 1);
-            item = Item.createItem(defaultMap);
+            target.setUseItem("blacktiket",1);
+            target2.setRecipe("blacktiket",1);
+           
 
         }
 
-        @AfterEach
-        void cleanUp(){
-            Item.resetItem();
-        }
-
+        
         @Test
         @DisplayName("뽑혔는가")
         void oneGachaTest(){
 
-            Gacha gacha = new Gacha(item,target);
+            
             double f = 0.0012f;
 
-            assertInstanceOf(Boolean.class, gacha);
+            assertInstanceOf(Boolean.class, Gacha.oneGacha(f));
+            assertTrue(Gacha.oneGacha(1));
         }
+
+        @Test
+        @DisplayName("뽑기확률이 0일때")
+        @RepeatedTest(1000)
+        void zeroGachaTest(){
+
+            assertFalse(Gacha.oneGacha(0));
+        }
+
+
+        
     }
 
 
     @Nested
+    @Disabled
     public class ReadyForGachaTest {
 
         @BeforeEach
@@ -62,23 +79,15 @@ public class GachaTest {
         }
 
         @Test
-        @DisplayName("Target을 만들기 위해 남은 item 수량 찾기")
-        void getLeftItemNumTest(){
-
-            String targetName = target.getName();
-            HashSet<String> itemname = new HashSet<>(target.getRecipe());
-
-            HashMap<String,Integer> leftItem = 
-
-            //itemname 안에 있는 
-
-            // gacha 객체 생성
-            Gacha gacha = new Gacha(item,target);
-
-            // gacha전 남은 item 수량
+        @DisplayName("Target의 레시피 얻기")
+        void getRecipeTest(){
 
             
-            gacha.
+            HashSet<String> itemnames = new HashSet<>(target.getRecipe()); // target의 레시피를 얻음
+
+            
+
+            
 
 
 

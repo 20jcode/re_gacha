@@ -6,21 +6,42 @@ package re_gacha;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.stream.*;
+import java.util.Random;
 
 public class App {
-    public String getGreeting() {
-        return "Hello World!";
-    }
-
+    
     public static void main(String[] args) {
-        HashMap<String,Integer> a = new HashMap<>();
-        a.put("dd",12);
-        a.put("ss",13);
-        a.put("se",-2);
+        
+        double item1 = 0.12d;
+        double item2 = 0.06d;
+        double item3 = 0.3d;
+        double randnum2 = 0.88d;
+
+        System.out.println(randLogic(randnum2,item1,item2,item3));
 
         
+    }
+    public static double randLogic(double randnum, double...args){// double -> int , 오차보정 
 
-        System.out.println(a.values().stream().anyMatch(e->e<0));
+        int underN = 1000000; // 10^6
+        int rand = (int)(randnum*1000000);
 
+        for(double arg : args){
+            int toInt = (int)(arg*1000000);
+            
+            System.out.println("underN : "+underN);
+            System.out.println(arg);
+
+            if ((underN-toInt <= rand) && (rand < underN)){
+                return arg;
+            }
+
+            underN -= toInt;
+            System.out.println(underN);
+            
+        }
+
+        return 0;
     }
 }
+

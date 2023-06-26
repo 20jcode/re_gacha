@@ -27,7 +27,7 @@ public class Target {
     }
 
     /**
-     * 
+     * 해당 Map이 비어있다면, 조합으로 생성할 수 없는 단위 아이템이다.
      * @param key 조합에 필요한 아이템의 이름
      * @param value 조합에 필요한 갯수
      */
