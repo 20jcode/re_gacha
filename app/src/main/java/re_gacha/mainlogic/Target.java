@@ -8,8 +8,8 @@ import java.util.HashMap;
 public class Target {
     
     private String name;
-    private Map<String,Integer> recipe = new HashMap<>();
-    private Map<String,Integer> consum = new HashMap<>();
+    protected Map<String,Integer> recipe = new HashMap<>();
+    protected Map<String,Integer> consum = new HashMap<>();
 
     public Target(){
 
@@ -40,7 +40,7 @@ public class Target {
         return recipe.keySet();
     }
 
-    public int getValue(String key){
+    public int getValue(String key){ //TODO : 레시피의 소모값을 얻는 것을 명확히 해주기
         return recipe.get(key);
     }
 
@@ -60,7 +60,7 @@ public class Target {
 
     }
 
-    public int getUseItem(String key) {
+    public int getUseItemValue(String key) {
         return consum.get(key);
     }
 }

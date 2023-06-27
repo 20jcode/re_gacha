@@ -108,10 +108,9 @@ public class TargetTest {
             assertThrowsExactly(IllegalArgumentException.class, ()->target.getUseItem("key"), "아이템이 없습니다");
         }
 
-
-
-            
-
         
     }
+
+    @Nested
+    @DisplayName("")
 }
