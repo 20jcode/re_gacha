@@ -1,7 +1,7 @@
 package re_gacha.mainlogic;
 
 import re_gacha.mainlogic.Gacha;
-
+@D
 public class GachaController {
     
     private Item item;
